@@ -11,7 +11,7 @@ class process():
                 "endpoint":endpoint,
                 "tags":"pid="+str(i["pid"])+",name="+i["name"]+",cmd="+' '.join(p.cmdline()),
                 "timestamp":int(time.time()),
-                "metric": "sys.process.memory.percent",
+                "metric": "sys.process.memory.percent.%s" % str(i["pid"]),
                 "counterType":"GAUGE",
                 "value":p.memory_percent(),
                 "step": 90
@@ -20,7 +20,7 @@ class process():
                 "endpoint":endpoint,
                 "tags":"pid="+str(i["pid"])+",name="+i["name"]+",cmd="+' '.join(p.cmdline()),
                 "timestamp":int(time.time()),
-                "metric": "sys.process.cpu.percent",
+                "metric": "sys.process.cpu.percent.%s" % str(i["pid"]),
                 "counterType":"GAUGE",
                 "value":p.cpu_percent(interval=1),
                 "step": 90
