@@ -1,29 +1,29 @@
 #coding:utf-8
 import psutil
 import time,json
-endpoint="10.17.116.3"
+endpoint="172.30.4.75"
 class process():
     def getProcessCpu(self,res):
         result=[]
         for i in res:
             p = psutil.Process(i["pid"])
             tmp_memory_percent={
-                "Endpoint":endpoint,
-                "TAGS":"pid="+str(i["pid"])+",name="+i["name"]+",cmd="+' '.join(p.cmdline()),
-                "Timestamp":int(time.time()),
-                "Metric": "sys.process.memory.percent",
-                "CounterType":"GAUGE",
-                "Value":p.memory_percent(),
-                "Step": 90
+                "endpoint":endpoint,
+                "tags":"pid="+str(i["pid"])+",name="+i["name"]+",cmd="+' '.join(p.cmdline()),
+                "timestamp":int(time.time()),
+                "metric": "sys.process.memory.percent",
+                "counterType":"GAUGE",
+                "value":p.memory_percent(),
+                "step": 90
                 }
             tmp_cpu_percent={
-                "Endpoint":endpoint,
-                "TAGS":"pid="+str(i["pid"])+",name="+i["name"]+",cmd="+' '.join(p.cmdline()),
-                "Timestamp":int(time.time()),
-                "Metric": "sys.process.cpu.percent",
-                "CounterType":"GAUGE",
-                "Value":p.cpu_percent(interval=1),
-                "Step": 90
+                "endpoint":endpoint,
+                "tags":"pid="+str(i["pid"])+",name="+i["name"]+",cmd="+' '.join(p.cmdline()),
+                "timestamp":int(time.time()),
+                "metric": "sys.process.cpu.percent",
+                "counterType":"GAUGE",
+                "value":p.cpu_percent(interval=1),
+                "step": 90
             }
             result.append(tmp_memory_percent)
             result.append(tmp_cpu_percent)
