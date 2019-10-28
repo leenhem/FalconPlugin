@@ -1,4 +1,5 @@
-#coding:utf-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import psutil
 import time,json
 endpoint="172.30.4.75"
