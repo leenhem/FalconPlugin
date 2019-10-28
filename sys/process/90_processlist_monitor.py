@@ -10,7 +10,7 @@ class process():
             p = psutil.Process(i["pid"])
             tmp_memory_percent={
                 "endpoint":endpoint,
-                "tags":"pid="+str(i["pid"])+",name="+i["name"]+",cmd="+'\t'.join(p.cmdline()),
+                "tags":"pid="+str(i["pid"])+",name="+i["name"]+",cmd="+' '.join(p.cmdline()),
                 "timestamp":int(time.time()),
                 "metric": "sys.process.memory.percent",
                 "counterType":"GAUGE",
@@ -19,7 +19,7 @@ class process():
                 }
             tmp_cpu_percent={
                 "endpoint":endpoint,
-                "tags":"pid="+str(i["pid"])+",name="+i["name"]+",cmd="+'\t'.join(p.cmdline()),
+                "tags":"pid="+str(i["pid"])+",name="+i["name"]+",cmd="+' '.join(p.cmdline()),
                 "timestamp":int(time.time()),
                 "metric": "sys.process.cpu.percent",
                 "counterType":"GAUGE",
