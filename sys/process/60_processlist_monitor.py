@@ -23,7 +23,6 @@ if __name__ == "__main__":
         process=i.split(' ')
         while '' in process:
             process.remove('')
-        print process[10:]
         tmp_memory_percent={
                 "endpoint":endpoint,
                 "tags":"pid="+process[1]+",cmd="+' '.join(process[10:]),
