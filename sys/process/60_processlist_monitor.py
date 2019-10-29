@@ -38,7 +38,7 @@ if __name__ == "__main__":
                 "timestamp":int(time.time()),
                 "metric": "sys.process.cpu.percent",
                 "counterType":"GAUGE",
-                "value":process[4],
+                "value":process[2],
                 "step": 60
             }
         data.append(tmp_cpu_percent)
