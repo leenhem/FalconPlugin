@@ -28,7 +28,7 @@ if __name__ == "__main__":
                 "timestamp":int(time.time()),
                 "metric": "sys.process.memory.percent",
                 "counterType":"GAUGE",
-                "value":process[3],
+                "value":float(process[3]),
                 "step": 60
                 }
 
@@ -38,7 +38,7 @@ if __name__ == "__main__":
                 "timestamp":int(time.time()),
                 "metric": "sys.process.cpu.percent",
                 "counterType":"GAUGE",
-                "value":process[2],
+                "value":float(process[2]),
                 "step": 60
             }
         data.append(tmp_cpu_percent)
