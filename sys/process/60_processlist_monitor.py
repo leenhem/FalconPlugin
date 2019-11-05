@@ -14,7 +14,7 @@ def get_all_mountpoint():
     raw_data = Popen(['grep','-v','%CPU'], stdin=raw_data.stdout, stdout=PIPE, stderr=PIPE).communicate()[0]
     for i in raw_data.split('\n'):
         data.append(i)
-        if len(data) == 60:break
+        if len(data) == 10:break
     return data
     
 if __name__ == "__main__":
