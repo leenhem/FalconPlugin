@@ -10,7 +10,8 @@ endpoint="172.30.4.75"
 def get_all_mountpoint():
     data=[]
     p0=Popen(['ps','-aux'],stdout=PIPE,stderr=PIPE)
-    raw_data = Popen(['sort','-k4nr'], stdin=p0.stdout, stdout=PIPE, stderr=PIPE).communicate()[0]
+    raw_data = Popen(['sort','-k4nr'], stdin=p0.stdout, stdout=PIPE, stderr=PIPE)
+    raw_data = Popen(['grep','-v','%CPU'], stdin=raw_data.stdout, stdout=PIPE, stderr=PIPE).communicate()[0]
     for i in raw_data.split('\n'):
         data.append(i)
         if len(data) == 60:break
