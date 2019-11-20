@@ -1,3 +1,10 @@
+'''
+@Descripttion: 
+@Author: leenhem
+@Contact: leenhem.lh@gmail.com
+@Date: 2019-10-29 18:27:27
+@FilePath: /FalconPlugin/sys/process/60_processlist_monitor.py
+'''
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from subprocess import Popen, PIPE
@@ -8,18 +15,28 @@ data = []
 endpoint="172.30.4.75"
 
 def get_all_mountpoint():
-    data=[]
+    memory_data=[]
+    cpu_data=[]
     p0=Popen(['ps','-aux'],stdout=PIPE,stderr=PIPE)
     raw_data = Popen(['sort','-k4nr'], stdin=p0.stdout, stdout=PIPE, stderr=PIPE)
     raw_data = Popen(['grep','-v','%CPU'], stdin=raw_data.stdout, stdout=PIPE, stderr=PIPE).communicate()[0]
+
+    p0=Popen(['ps','-aux'],stdout=PIPE,stderr=PIPE)
+    cpu=Popen(['sort','-k3nr'], stdin=p0.stdout, stdout=PIPE, stderr=PIPE)
+    cpu = Popen(['grep','-v','%CPU'], stdin=cpu.stdout, stdout=PIPE, stderr=PIPE).communicate()[0]
+
     for i in raw_data.split('\n'):
-        data.append(i)
-        if len(data) == 10:break
-    return data
+        memory_data.append(i)
+        if len(memory_data) == 10:break
+
+    for i in cpu.split('\n'):
+        cpu_data.append(i)
+        if len(cpu_data) == 10:break
+    return memory_data,cpu_data
     
 if __name__ == "__main__":
-    list=get_all_mountpoint()
-    for i in list:
+    memory,cpu=get_all_mountpoint()
+    for i in memory:
         process=i.split(' ')
         while '' in process:
             process.remove('')
@@ -30,9 +47,12 @@ if __name__ == "__main__":
                 "metric": "sys.process.memory.percent",
                 "counterType":"GAUGE",
                 "value":float(process[3]),
-                "step": 60
+                "step": 600
                 }
-
+        data.append(tmp_memory_percent)
+    for i in cpu:
+        while '' in process:
+            process.remove('')
         tmp_cpu_percent={
                 "endpoint":endpoint,
                 "tags":"pid="+process[1]+",cmd="+' '.join(process[10:]),
@@ -40,8 +60,7 @@ if __name__ == "__main__":
                 "metric": "sys.process.cpu.percent",
                 "counterType":"GAUGE",
                 "value":float(process[2]),
-                "step": 60
+                "step": 600
             }
         data.append(tmp_cpu_percent)
-        data.append(tmp_memory_percent)
     print json.dumps(data)
