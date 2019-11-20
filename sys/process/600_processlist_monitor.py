@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 '''
 @Descripttion: 
 @Author: leenhem
@@ -5,8 +8,7 @@
 @Date: 2019-10-29 18:27:27
 @FilePath: /FalconPlugin/sys/process/60_processlist_monitor.py
 '''
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+
 from subprocess import Popen, PIPE
 import json
 import time
