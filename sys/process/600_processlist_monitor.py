@@ -44,7 +44,7 @@ if __name__ == "__main__":
             process.remove('')
         tmp_memory_percent={
                 "endpoint":endpoint,
-                "tags":"pid="+process[1]+",cmd="+' '.join(process[10:]),
+                "tags":"pid="+process[1]+",cmd="+' '.join(process[10:])[0:50],
                 "timestamp":int(time.time()),
                 "metric": "sys.process.memory.percent",
                 "counterType":"GAUGE",
@@ -58,7 +58,7 @@ if __name__ == "__main__":
             process.remove('')
         tmp_cpu_percent={
                 "endpoint":endpoint,
-                "tags":"pid="+process[1]+",cmd="+' '.join(process[10:]),
+                "tags":"pid="+process[1]+",cmd="+' '.join(process[10:])[0:50],
                 "timestamp":int(time.time()),
                 "metric": "sys.process.cpu.percent",
                 "counterType":"GAUGE",
