@@ -21,11 +21,11 @@ def get_all_mountpoint():
     cpu_data=[]
     p0=Popen(['ps','-aux'],stdout=PIPE,stderr=PIPE)
     raw_data = Popen(['sort','-k4nr'], stdin=p0.stdout, stdout=PIPE, stderr=PIPE)
-    raw_data = Popen(['grep','-vE','%CPU|grep|-aux|600_processlist_monitor'], stdin=raw_data.stdout, stdout=PIPE, stderr=PIPE).communicate()[0]
+    raw_data = Popen(['grep','-vE','%CPU|grep|-aux|600_processlist_monitor|k4nr'], stdin=raw_data.stdout, stdout=PIPE, stderr=PIPE).communicate()[0]
 
     p0=Popen(['ps','-aux'],stdout=PIPE,stderr=PIPE)
     cpu=Popen(['sort','-k3nr'], stdin=p0.stdout, stdout=PIPE, stderr=PIPE)
-    cpu = Popen(['grep','-vE','%CPU|grep|-aux|600_processlist_monitor'], stdin=cpu.stdout, stdout=PIPE, stderr=PIPE).communicate()[0]
+    cpu = Popen(['grep','-vE','%CPU|grep|-aux|600_processlist_monitor|k3nr'], stdin=cpu.stdout, stdout=PIPE, stderr=PIPE).communicate()[0]
 
     for i in raw_data.split('\n'):
         memory_data.append(i)
