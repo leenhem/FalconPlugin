@@ -1,0 +1,38 @@
+{
+    "debug": true,
+    "hostname": "172.30.4.75",
+    "ip": "172.30.4.75",
+    "plugin": {
+        "enabled": true,
+        "dir": "./plugin",
+        "git": "http://git.quantgroup.cn/ops/falconplugin.git",
+        "logs": "./logs"
+    },
+    "heartbeat": {
+        "enabled": true,
+        "addr": "openfalcon-heartbeat.quantgroups.com:6030",
+        "interval": 60,
+        "timeout": 1000
+    },
+    "transfer": {
+        "enabled": true,
+        "addrs": [
+            "openfalcon-transfer.quantgroups.com:8433"
+        ],
+        "interval": 60,
+        "timeout": 1000
+    },
+    "http": {
+        "enabled": true,
+        "listen": ":1988",
+        "backdoor": false
+    },
+    "collector": {
+        "ifacePrefix": ["eth", "em"],
+        "mountPoint": []
+    },
+    "default_tags": {
+    },
+    "ignore": {
+    }
+}
