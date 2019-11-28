@@ -55,7 +55,7 @@ if __name__ == "__main__":
                     }
             data.append(tmp_memory_percent)
     for process in sorted(processList,key=lambda x:x[2],reverse=True)[:5]: #取CPU前5
-        if process[2]>0
+        if process[2]>0:
             tmp_cpu_percent={
                     "endpoint":endpoint,
                     "tags":"pid="+process[1]+",cmd="+process[6],
