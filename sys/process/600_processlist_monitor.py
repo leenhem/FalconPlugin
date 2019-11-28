@@ -43,27 +43,27 @@ def get_all_mountpoint():
 if __name__ == "__main__":
     processList=get_all_mountpoint()
     for process in sorted(processList,key=lambda x:x[3],reverse=True)[:5]: #取Memory前5
-        if process[3]<=0:break
-        tmp_memory_percent={
-                "endpoint":endpoint,
-                "tags":"pid="+process[1]+",cmd="+process[6],
-                "timestamp":int(time.time()),
-                "metric": "sys.process.memory.percent",
-                "counterType":"GAUGE",
-                "value":process[3],
-                "step": 600
-                }
-        data.append(tmp_memory_percent)
+        if process[3]>0:
+            tmp_memory_percent={
+                    "endpoint":endpoint,
+                    "tags":"pid="+process[1]+",cmd="+process[6],
+                    "timestamp":int(time.time()),
+                    "metric": "sys.process.memory.percent",
+                    "counterType":"GAUGE",
+                    "value":process[3],
+                    "step": 600
+                    }
+            data.append(tmp_memory_percent)
     for process in sorted(processList,key=lambda x:x[2],reverse=True)[:5]: #取CPU前5
-        if process[2]<=0:break
-        tmp_cpu_percent={
-                "endpoint":endpoint,
-                "tags":"pid="+process[1]+",cmd="+process[6],
-                "timestamp":int(time.time()),
-                "metric": "sys.process.cpu.percent",
-                "counterType":"GAUGE",
-                "value":process[2],
-                "step": 600
-            }
-        data.append(tmp_cpu_percent)
+        if process[2]>0
+            tmp_cpu_percent={
+                    "endpoint":endpoint,
+                    "tags":"pid="+process[1]+",cmd="+process[6],
+                    "timestamp":int(time.time()),
+                    "metric": "sys.process.cpu.percent",
+                    "counterType":"GAUGE",
+                    "value":process[2],
+                    "step": 600
+                }
+            data.append(tmp_cpu_percent)
     print json.dumps(data)
