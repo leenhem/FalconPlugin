@@ -43,6 +43,7 @@ def get_all_mountpoint():
 if __name__ == "__main__":
     processList=get_all_mountpoint()
     for process in sorted(processList,key=lambda x:x[3],reverse=True)[:5]: #取Memory前5
+        if process[3]<=0:break
         tmp_memory_percent={
                 "endpoint":endpoint,
                 "tags":"pid="+process[1]+",cmd="+process[6],
@@ -54,6 +55,7 @@ if __name__ == "__main__":
                 }
         data.append(tmp_memory_percent)
     for process in sorted(processList,key=lambda x:x[2],reverse=True)[:5]: #取CPU前5
+        if process[2]<=0:break
         tmp_cpu_percent={
                 "endpoint":endpoint,
                 "tags":"pid="+process[1]+",cmd="+process[6],
